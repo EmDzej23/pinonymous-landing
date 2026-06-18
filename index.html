@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pinonymous — Anonymous moments near you</title>
+<meta name="description" content="Drop a photo or video as an anonymous map pin where you are — and it disappears within a day. See what's happening around you, right now." />
+<meta name="theme-color" content="#0B0C13" />
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Pinonymous — Anonymous moments near you" />
+<meta property="og:description" content="Drop a pin. Stay a ghost. Anonymous, ephemeral photo & video posts on a live map." />
+<meta property="og:image" content="https://pinonymous.app/assets/shot1.png" />
+<meta property="og:url" content="https://pinonymous.app" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<style>
+  :root {
+    --ink: #0B0C13;
+    --surface: #14161F;
+    --chalk: #F5F6FB;
+    --mist: #9BA0B5;
+    --violet: #7A5CFF;
+    --fuchsia: #C24DFF;
+    --hairline: rgba(255, 255, 255, 0.08);
+    --grad: linear-gradient(100deg, #7A5CFF, #C24DFF);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--chalk);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--violet); text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* ambient glow */
+  .glow {
+    position: absolute; inset: 0; z-index: -1; overflow: hidden;
+  }
+  .glow::before {
+    content: ""; position: absolute; top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(closest-side, rgba(122, 92, 255, 0.28), transparent 70%);
+    filter: blur(20px);
+  }
+
+  /* hero */
+  header { position: relative; text-align: center; padding: 88px 0 56px; }
+  .mark { width: 84px; height: auto; filter: drop-shadow(0 8px 28px rgba(122,92,255,0.35)); }
+  h1 { font-size: clamp(40px, 9vw, 76px); font-weight: 800; letter-spacing: -0.02em; margin-top: 22px; line-height: 1.02; }
+  .tagline { font-size: clamp(18px, 3.6vw, 24px); color: var(--chalk); margin-top: 18px; font-weight: 600; }
+  .sub { color: var(--mist); margin-top: 10px; font-size: 17px; }
+
+  .cta { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px;
+    padding: 15px 26px; border-radius: 999px; background: var(--grad);
+    color: #fff; font-weight: 700; font-size: 17px;
+    box-shadow: 0 10px 30px rgba(122,92,255,0.4); transition: transform .15s ease, box-shadow .15s ease; }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(122,92,255,0.5); }
+  .cta svg { width: 22px; height: 22px; }
+  .cta small { display: block; font-size: 11px; font-weight: 500; opacity: 0.85; line-height: 1; }
+  .cta b { font-size: 18px; line-height: 1.1; }
+
+  /* features */
+  section { padding: 56px 0; }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: 20px; padding: 24px;
+  }
+  .card .ic { font-size: 26px; }
+  .card h3 { font-size: 18px; margin-top: 12px; }
+  .card p { color: var(--mist); margin-top: 6px; font-size: 15px; }
+
+  /* screenshots */
+  .shots { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+  .shots img {
+    width: 240px; max-width: 70vw; border-radius: 30px;
+    border: 1px solid var(--hairline);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  }
+  .shots img:nth-child(2) { transform: translateY(-18px); }
+  .section-title { text-align: center; font-size: clamp(26px, 5vw, 36px); font-weight: 800; margin-bottom: 38px; letter-spacing: -0.01em; }
+
+  /* closing CTA */
+  .closing { text-align: center; }
+
+  footer { border-top: 1px solid var(--hairline); padding: 36px 0 56px; text-align: center; color: var(--mist); font-size: 14px; }
+  footer .links { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+  footer a { color: var(--mist); }
+  footer a:hover { color: var(--chalk); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="glow"></div>
+  <div class="wrap">
+    <img class="mark" src="assets/mark.svg" alt="Pinonymous" />
+    <h1 class="grad-text">Pinonymous</h1>
+    <p class="tagline">Here now. Gone in a day.</p>
+    <p class="sub">Drop a pin. Stay a ghost.</p>
+    <a class="cta" href="https://apps.apple.com/app/id6779567087" aria-label="Download on the App Store">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.36 1.43c.04 1.06-.36 2.1-1.04 2.86-.7.79-1.85 1.4-2.96 1.31-.05-1.02.42-2.08 1.06-2.78.72-.79 1.94-1.37 2.94-1.39zM20.5 17.2c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.52-4.12 3.53-1.54.02-1.93-1-4.02-.99-2.09.01-2.52 1.01-4.06.99-1.73-.02-3.05-1.78-4.04-3.34C-.02 16.99-.32 11.9 1.4 9.2 2.62 7.27 4.55 6.14 6.36 6.14c1.85 0 3.01 1.01 4.54 1.01 1.48 0 2.38-1.01 4.52-1.01 1.61 0 3.32.88 4.54 2.39-3.99 2.19-3.34 7.88.54 9.68z"/></svg>
+      <span><small>Download on the</small><b>App Store</b></span>
+    </a>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="features">
+    <div class="card">
+      <div class="ic">📍</div>
+      <h3>Drop a pin where you are</h3>
+      <p>Post a photo or short video to your exact spot. People nearby discover it on the map.</p>
+    </div>
+    <div class="card">
+      <div class="ic">⏳</div>
+      <h3>Everything is ephemeral</h3>
+      <p>Every post vanishes automatically about a day after you share it. No history, no trace.</p>
+    </div>
+    <div class="card">
+      <div class="ic">🎭</div>
+      <h3>Totally anonymous</h3>
+      <p>No account, no name, no profile — just what's happening around you, right now.</p>
+    </div>
+    <div class="card">
+      <div class="ic">👥</div>
+      <h3>See where it's busy</h3>
+      <p>Check in for a while and watch the live activity heatmap light up nearby.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2 class="section-title">A living map of <span class="grad-text">right now</span></h2>
+  <div class="shots">
+    <img src="assets/shot1.png" alt="Pinonymous map" loading="lazy" />
+    <img src="assets/shot2.png" alt="Pinonymous feed" loading="lazy" />
+    <img src="assets/shot3.png" alt="Pinonymous post" loading="lazy" />
+  </div>
+</section>
+
+<section class="wrap closing">
+  <h2 class="section-title">Here now. Gone in a day.</h2>
+  <a class="cta" href="https://apps.apple.com/app/id6779567087" aria-label="Download on the App Store">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.36 1.43c.04 1.06-.36 2.1-1.04 2.86-.7.79-1.85 1.4-2.96 1.31-.05-1.02.42-2.08 1.06-2.78.72-.79 1.94-1.37 2.94-1.39zM20.5 17.2c-.55 1.27-.82 1.84-1.53 2.96-.99 1.57-2.39 3.52-4.12 3.53-1.54.02-1.93-1-4.02-.99-2.09.01-2.52 1.01-4.06.99-1.73-.02-3.05-1.78-4.04-3.34C-.02 16.99-.32 11.9 1.4 9.2 2.62 7.27 4.55 6.14 6.36 6.14c1.85 0 3.01 1.01 4.54 1.01 1.48 0 2.38-1.01 4.52-1.01 1.61 0 3.32.88 4.54 2.39-3.99 2.19-3.34 7.88.54 9.68z"/></svg>
+    <span><small>Download on the</small><b>App Store</b></span>
+  </a>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="https://api.pinonymous.app/privacy">Privacy</a>
+      <a href="https://api.pinonymous.app/terms">Terms</a>
+      <a href="https://api.pinonymous.app/support">Support</a>
+      <a href="mailto:support@pinonymous.app">Contact</a>
+    </div>
+    <div>© 2026 Marko Jereminov · Pinonymous</div>
+  </div>
+</footer>
+
+</body>
+</html>
